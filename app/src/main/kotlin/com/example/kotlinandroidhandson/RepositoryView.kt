@@ -32,12 +32,12 @@ class RepositoryView : RelativeLayout {
     val repositoryStargazerCountView: TextView = findView(R.id.repository_stargazer_count_view)
 
     fun setRepository(repository: Repository) {
-//        repository.run {
-//            owner.avatarUrl?.let(userAvatarView::setImageURI)
-//            repositoryNameView.text = fullName
-//            repositoryDescriptionView.text = description
-//            repositoryLanguageView.text = language
-//            repositoryStargazerCountView.text = context.getString(R.string.stargazer_count, stargazersCount)
-//        }
+        repository.run {
+            owner.avatarUrl?.let(userAvatarView::setImageURI)
+            repositoryNameView.text = fullName
+            repositoryDescriptionView.text = description
+            repositoryLanguageView.text = language
+            repositoryStargazerCountView.text = context.getString(R.string.stargazer_count, stargazersCount)
+        }
     }
 }

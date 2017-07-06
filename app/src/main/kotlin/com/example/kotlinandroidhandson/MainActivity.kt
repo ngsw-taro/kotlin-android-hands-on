@@ -10,7 +10,12 @@ import com.github.salomonbrys.kodein.KodeinInjected
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.instance
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.rx2.await
 
 class MainActivity : AppCompatActivity(), KodeinInjected {
 
@@ -37,6 +42,8 @@ class MainActivity : AppCompatActivity(), KodeinInjected {
             val repository = listAdapter.repositories[position]
 
             /* ここでリポジトリ詳細画面を起動する */
+            val intent = RepositoryActivity.intent(this, repository)
+            startActivity(intent)
         }
 
         val searchEditText = findViewById<EditText>(R.id.search_edit_text)
@@ -45,14 +52,30 @@ class MainActivity : AppCompatActivity(), KodeinInjected {
         // Searchボタンを押したときの処理
         searchButton.setOnClickListener {
             val query = searchEditText.text.toString()
+            job = launch(UI) {
+                // 問い合わせ
+                val page = async(CommonPool) {
+                    githubClient.search(query).await()
+                }.await()
 
-            // 問い合わせ
-            val page = githubClient.search(query).blockingGet()
-
-            // 取得したページのアイテムをリストに反映
-            listAdapter.repositories = page.items
-            listAdapter.notifyDataSetChanged()
+                // 取得したページのアイテムをリストに反映
+                listAdapter.repositories = page.items
+                listAdapter.notifyDataSetChanged()
+            }
         }
+
+        /* RxJavaバージョン
+        searchButton.setOnClickListener {
+            val query = searchEditText.text.toString()
+            disposable = githubClient.search(query)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy { page ->
+                        listAdapter.repositories = page.items
+                        listAdapter.notifyDataSetChanged()
+                    }
+        }
+        */
     }
 
     override fun onDestroy() {
