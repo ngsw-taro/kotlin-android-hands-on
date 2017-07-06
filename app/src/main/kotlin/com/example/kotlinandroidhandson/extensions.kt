@@ -28,22 +28,5 @@ operator fun <T> Intent.get(name: String): T? = getParcelableExtra<Parcelable>(n
 val Activity.app: App
     get() = application as App
 
-suspend fun <T : Any> Call<T>.await(): T = suspendCancellableCoroutine { continuation ->
-    enqueue(object : Callback<T> {
-        override fun onResponse(call: Call<T>, response: Response<T>) {
-            val result = response.body()
-            if (result != null) {
-                continuation.resume(result)
-            } else {
-                continuation.resumeWithException(NullPointerException())
-            }
-        }
-
-        override fun onFailure(call: Call<T>, t: Throwable) {
-            continuation.resumeWithException(t)
-        }
-    })
-}
-
 fun Any.toParcelable(): Parcelable = Parcels.wrap(this)
 fun <T> Parcelable.unwrap(): T = Parcels.unwrap(this)

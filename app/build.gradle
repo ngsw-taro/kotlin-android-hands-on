@@ -51,6 +51,7 @@ dependencies {
     def coroutinesVersion = '0.16'
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion"
 
     def parcelerVersion = '1.1.9'
     compile "org.parceler:parceler-api:$parcelerVersion"
