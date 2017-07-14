@@ -3,12 +3,12 @@ package com.example.kotlinandroidhandson
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.kotlinandroidhandson.model.Repository
 import com.facebook.drawee.view.SimpleDraweeView
 
-class RepositoryView : FrameLayout {
+class RepositoryView : RelativeLayout {
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -17,6 +17,8 @@ class RepositoryView : FrameLayout {
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_repository, this)
+        val padding = resources.getDimension(R.dimen.card_padding).toInt()
+        setPadding(padding, padding, padding, padding)
     }
 
     val userAvatarView: SimpleDraweeView = findView(R.id.user_avatar_view)
