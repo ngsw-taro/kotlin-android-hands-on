@@ -15,7 +15,6 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.rx2.await
 
 class MainActivity : AppCompatActivity(), KodeinInjected {
 
@@ -54,8 +53,12 @@ class MainActivity : AppCompatActivity(), KodeinInjected {
             val query = searchEditText.text.toString()
             job = launch(UI) {
                 // 問い合わせ
+
+                // rxSingleバージョン
+                // val page = githubClient.search(query).await()
+
                 val page = async(CommonPool) {
-                    githubClient.search(query).await()
+                    githubClient.search(query).blockingGet()
                 }.await()
 
                 // 取得したページのアイテムをリストに反映
