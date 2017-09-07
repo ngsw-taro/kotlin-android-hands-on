@@ -13,7 +13,7 @@ class RepositoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
 
-        val repository: Repository = intent["repository"] ?: throw IllegalStateException("repositoryがないよ")
+//        val repository: Repository = intent["repository"] ?: throw IllegalStateException("repositoryがないよ")
 //        title = repository.fullName
 //
 //        val repositoryView = findViewById(R.id.repository_view) as RepositoryView

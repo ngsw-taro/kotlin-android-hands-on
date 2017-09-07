@@ -1,13 +1,10 @@
 package com.example.kotlinandroidhandson.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import org.parceler.Parcel
-import org.parceler.ParcelConstructor
-import org.parceler.ParcelProperty
+import kotlinx.android.parcel.Parcelize
 
-@Parcel
-data class User
-@ParcelConstructor
-constructor(@ParcelProperty("id") val id: Long,
-            @ParcelProperty("loginId") @SerializedName("login") val loginId: String,
-            @ParcelProperty("avatarUrl") val avatarUrl: String?)
+@Parcelize
+data class User(val id: Long,
+                @SerializedName("login") val loginId: String,
+                val avatarUrl: String?) : Parcelable

@@ -38,10 +38,12 @@ class App : Application(), KodeinAware {
 
         // GithubClientの実装をDIに設定
         bind<GithubClient>() with singleton {
+            // ここから
             object : GithubClient {
                 override fun search(query: String): Single<Page<Repository>> =
                         Single.just(Page(1, listOf(Repository(id = 1))))
             }
+            // ここまでを削除して、Retrofitで生成したクライアントを返す
         }
     }
 
