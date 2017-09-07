@@ -12,7 +12,7 @@ class RepositoryActivity : AppCompatActivity() {
     companion object {
         fun intent(context: Context, repository: Repository): Intent =
                 context.intent<RepositoryActivity>()
-                        .putExtra("repository", repository.toParcelable())
+                        .putExtra("repository", repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
