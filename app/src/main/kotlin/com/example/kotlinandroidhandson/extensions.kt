@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import kotlin.reflect.KClass
 
 @Suppress("UNCHECKED_CAST")
-fun <T : View> View.findView(@IdRes id: Int): T = findViewById(id) as T
+fun <T : View> View.findView(@IdRes id: Int): T = findViewById(id)
 
 fun <T : Any> Retrofit.create(service: KClass<T>): T = create(service.java)
 

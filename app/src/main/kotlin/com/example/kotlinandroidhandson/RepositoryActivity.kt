@@ -16,10 +16,10 @@ class RepositoryActivity : AppCompatActivity() {
 //        val repository: Repository = intent["repository"] ?: throw IllegalStateException("repositoryがないよ")
 //        title = repository.fullName
 //
-//        val repositoryView = findViewById(R.id.repository_view) as RepositoryView
+//        val repositoryView = findViewById<RepositoryView>(R.id.repository_view)
 //        repositoryView.setRepository(repository)
 //
-//        val webView = findViewById(R.id.web_view) as WebView
+//        val webView = findViewById<WebView>(R.id.web_view)
 //        webView.loadUrl(repository.htmlUrl)
     }
 }

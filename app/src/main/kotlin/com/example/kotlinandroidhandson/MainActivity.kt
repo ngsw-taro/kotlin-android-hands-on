@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), KodeinInjected {
         setContentView(R.layout.activity_main)
 
         val listAdapter = RepositoryListAdapter(this)
-        val listView = findViewById(R.id.list_view) as ListView
+        val listView = findViewById<ListView>(R.id.list_view)
         listView.adapter = listAdapter
 
         // リポジトリリストのアイテムをタップしたときの処理
@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity(), KodeinInjected {
             /* ここでリポジトリ詳細画面を起動する */
         }
 
-        val searchEditText = findViewById(R.id.search_edit_text) as EditText
-        val searchButton = findViewById(R.id.search_button) as Button
+        val searchEditText = findViewById<EditText>(R.id.search_edit_text)
+        val searchButton = findViewById<Button>(R.id.search_button)
 
         // Searchボタンを押したときの処理
         searchButton.setOnClickListener {
